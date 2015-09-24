@@ -1,0 +1,4 @@
+requests
+lxml
+sqlalchemy
+awesome-slugify=1.6.5
