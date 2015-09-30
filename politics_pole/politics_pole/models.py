@@ -2,32 +2,44 @@ from django.db import models
 
 
 class Decree(models.Model):
-    id = models.IntegerField(primary_key=True)  # AutoField?
-    number = models.IntegerField(unique=True, blank=True, null=True)
-    title = models.TextField(blank=True, null=True)  # This field type is a guess.
-    link = models.TextField(blank=True, null=True)  # This field type is a guess.
+    number = models.IntegerField(unique=True)
+    title = models.TextField()
+    link = models.TextField(blank=True, null=True)
     date = models.DateField(blank=True, null=True)
 
     class Meta:
-        db_table="Decree"
+        db_table = "Decree"
 
+
+class Party(models.Model):
+    name = models.TextField()
+
+    class Meta:
+        db_table = "Party"
+
+    def __str__(self):
+        return self.name
 
 class Deputy(models.Model):
-    id = models.IntegerField(primary_key=True)
-    surname = models.TextField(blank=True, null=True)
-    name = models.TextField(blank=True, null=True)
-    slug = models.TextField(unique=True, blank=True, null=True)
+    surname = models.TextField()
+    name = models.TextField()
+    slug = models.TextField(unique=True)
+    party = models.ForeignKey(Party, related_name='party')
 
     class Meta:
-        db_table="Deputy"
+        db_table = "Deputy"
+
+    def __str__(self):
+        return "%s (%s)" % (self.slug , self.party)
+
 
 class Vote(models.Model):
-    deputy = models.ForeignKey(Deputy, primary_key=True, related_name='votes')
+    deputy = models.ForeignKey(Deputy, related_name='votes')
     decree = models.ForeignKey(Decree, related_name='decree')
-    vote_value = models.IntegerField(blank=True, null=True)
+    vote_value = models.IntegerField()
 
     class Meta:
-        db_table="Vote"
+        db_table = "Vote"
         unique_together = (('deputy', 'decree'),)
 
     def vote_to_str(vote_id):

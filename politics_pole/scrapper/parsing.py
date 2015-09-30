@@ -25,6 +25,17 @@ def apply_predicate_data(predicate, data):
     return result
 
 
+def get_decree_link(data_table):
+    """
+    """
+    decree_link_selector = '//table[@class="scrutins"]//a[contains(@href, "/dossiers/")]/@href'
+    decree_link = apply_predicate_data(decree_link_selector, data_table)
+    if len(decree_link) == 0:
+        decree_link = None
+
+    return decree_link
+
+
 def get_vote_links(data_table):
     """
     """
@@ -69,6 +80,25 @@ def get_decree_date(data_vote):
     return date(date_groups[2], date_groups[1], date_groups[0])
 
 
+# Parsing parties
+def get_party_list(data_vote):
+    """ Returns the node of parties
+    """
+    party_selector = '//*[@class="TTgroupe"]'
+    parties_node = apply_predicate_data(party_selector, data_vote)
+
+    return parties_node
+
+
+def get_party_name(deputy):
+    """
+    """
+    party_name_selector = '//a[@class="agroupe"]/@name'
+    party_name = apply_predicate_data(party_name_selector, deputy)
+
+    return party_name[0] if len(party_name) > 0 else ""
+
+
 # PARSING DEPUTY
 def get_deputy_list(data_vote):
     """
@@ -83,16 +113,18 @@ def get_deputy_name(deputy):
     """
     """
     deputy_name_selector = 'b/text()'
-    name = apply_predicate_data(deputy_name_selector, deputy)[0]
-    return str.strip(name)
+    name = apply_predicate_data(deputy_name_selector, deputy)
+
+    return str.strip(name[0]) if len(name) > 0 else ""
 
 
 def get_deputy_surname(deputy):
     """
     """
     deputy_surname_selector = 'text()'
-    surname = apply_predicate_data(deputy_surname_selector, deputy)[0]
-    return str.strip(surname)
+    surname = apply_predicate_data(deputy_surname_selector, deputy)
+
+    return str.strip(surname[0]) if len(surname) > 0 else ""
 
 
 # VOTE
