@@ -1,0 +1,6 @@
+{
+	"name": "SearchCenter",
+	"version": "0.0.0",
+	"private": true,
+	"main": "./SearchCenter.js"
+}

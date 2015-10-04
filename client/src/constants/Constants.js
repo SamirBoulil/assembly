@@ -1,0 +1,10 @@
+var BASE_URL = "http://127.0.0.0.1:8001";
+
+
+export default {
+	BASE_URL: BASE_URL,
+	DEPUTIES_LIST_URL: BASE_URL + "/deputies",
+	DEPUTIES_VOTES_URL: BASE_URL + "/deputies/DEPUTY_ID/votes",
+	DEPUTY_LIST_ACTION: "DEPUTY_LIST",
+	DEPUTY_VOTES_ACTION: "DEPUTY_VOTES"
+}
