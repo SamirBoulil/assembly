@@ -23,6 +23,7 @@ class VoteSerializer(serializers.ModelSerializer):
 
 
 class DeputySerializer(serializers.ModelSerializer):
+    party = serializers.StringRelatedField()
 
     class Meta:
         model = Deputy
