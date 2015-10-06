@@ -11,7 +11,7 @@ class DeputyGrid extends React.Component {
 		this.state = { deputies: DeputyListStore.getState() };
 
 		this.listChanged = this.listChanged.bind(this)
-		DeputyListActions.updateDeputyList()
+		DeputyListActions.loadDeputyListAction()
 	}
 
 	componentDidMount()    {

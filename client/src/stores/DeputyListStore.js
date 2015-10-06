@@ -1,63 +1,53 @@
 import AltInstance from '../lib/AltInstance';
+import localStore from '../lib/LocalStorageInstance';;
 import ImmutableStore from 'alt/utils/ImmutableUtil';
 import { List } from 'immutable';
 import ActionsDeputyList from 'actions/DeputyList';
+import Api from '../services/Api';
+
 //import ActionsDeputyDetails from 'actions/DeputyDetails';
 
 class DeputyListStore {
 
 	constructor() {
-		let { updateDeputyList } = ActionsDeputyList;
-		//let { showDeputyDetails } = ActionsDeputyDetails;
+		let { loadDeputyListAction } = ActionsDeputyList;
+		let { searchDeputyAction } = ActionsDeputyList;
 
 		this.bindListeners({
-			updateDeputyList: updateDeputyList,
-			//getDeputy: showDeputyDetails
+			loadDeputyList: loadDeputyListAction,
+			searchDeputy: searchDeputyAction
 		});
 
 		this.state = List();
 	}
 
-	//getDeputy(deputyId) {
-		//console.log("STORE: request to get deputy ID");
-		//if(this.state.size !== 0){
-			//console.log("Requesting deputy details " + deputyId)
+	loadDeputyList() {
+		let that = this;
 
-			//console.log("Will search deputy");
-			//let deputyIndex = this.state.findIndex((deputy) => deputy.id === deputyId);
-			//console.log(deputyIndex + "found");
-			//return deputyIndex !== (-1) ? this.state[deputyIndex] : false;
-		//}
-	//}
+		//if (localStore.enabled === true && localStore.get('deputies') === ""){
+		//// Downloading deputies
+		//Api.downloadDeputyList((data) => {
+		//return that.setState(data);
+		//});
 
-	updateDeputyList() {
+		//} else
 		if (this.state.size === 0) {
-			console.log("Requesting deputy list");
-			// Service
-			var request = new XMLHttpRequest();
-			var that = this;
-			request.open('GET', 'http://pole:8001/deputies', true);
-			request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-			request.onload = function() {
-				if (request.status >= 200 && request.status < 400) {
-					// Success!
-					var data = JSON.parse(request.responseText);
-					return that.setState(data);
-				} else {
-					// We reached our target server, but it returned an error
-					console.log("Server not ready");
-				}
-			};
-
-			request.onerror = function() {
-				// There was a connection error of some sort
-				console.log("An error happended during retrieval");
-			};
-
-			request.send();
+			//let data = localStore.get('deputies');
+			Api.downloadDeputyList((data) => {
+				return that.setState(data);
+			});
+		} else {
+			return this.state;
 		}
 
-		return this.state;
+		return false;
+	}
+
+	searchDeputy(keywords){
+		let that = this;
+		Api.searchDeputy(keywords, (data) => {
+			that.setState(data);
+		});
 	}
 }
 
