@@ -1,21 +1,36 @@
-import AltInstance    from '../lib/AltInstance';
+import AltInstance from '../lib/AltInstance';
 import ImmutableStore from 'alt/utils/ImmutableUtil';
-import { List }       from 'immutable';
-import Actions        from 'actions/DeputyList';
+import { List } from 'immutable';
+import ActionsDeputyList from 'actions/DeputyList';
+//import ActionsDeputyDetails from 'actions/DeputyDetails';
 
 class DeputyListStore {
 
 	constructor() {
-		let { updateDeputyList } = Actions;
+		let { updateDeputyList } = ActionsDeputyList;
+		//let { showDeputyDetails } = ActionsDeputyDetails;
 
 		this.bindListeners({
-			update: updateDeputyList,
+			updateDeputyList: updateDeputyList,
+			//getDeputy: showDeputyDetails
 		});
 
 		this.state = List();
 	}
 
-	update() {
+	//getDeputy(deputyId) {
+		//console.log("STORE: request to get deputy ID");
+		//if(this.state.size !== 0){
+			//console.log("Requesting deputy details " + deputyId)
+
+			//console.log("Will search deputy");
+			//let deputyIndex = this.state.findIndex((deputy) => deputy.id === deputyId);
+			//console.log(deputyIndex + "found");
+			//return deputyIndex !== (-1) ? this.state[deputyIndex] : false;
+		//}
+	//}
+
+	updateDeputyList() {
 		if (this.state.size === 0) {
 			console.log("Requesting deputy list");
 			// Service
