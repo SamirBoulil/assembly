@@ -20,6 +20,7 @@ class Party(models.Model):
     def __str__(self):
         return self.name
 
+
 class Deputy(models.Model):
     surname = models.TextField()
     name = models.TextField()
@@ -30,7 +31,7 @@ class Deputy(models.Model):
         db_table = "Deputy"
 
     def __str__(self):
-        return "%s (%s)" % (self.slug , self.party)
+        return "%s (%s)" % (self.slug, self.party)
 
 
 class Vote(models.Model):

@@ -1,8 +1,8 @@
 # coding: utf-8
 
 
-from rest_framework import viewsets
 from rest_framework import generics
+from rest_framework import filters
 
 from .models import Deputy
 
@@ -13,6 +13,8 @@ from .serializers import DeputyDetailsSerializer
 class DeputyViewSet(generics.ListAPIView):
     queryset = Deputy.objects.all()
     serializer_class = DeputySerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'surname')
 
 
 class VotesForDeputyView(generics.ListAPIView):
