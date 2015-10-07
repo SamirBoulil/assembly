@@ -14,7 +14,12 @@ class SearchCenter extends React.Component {
 	_onChange(event){
 		let value = event.target.value;
 		this.setState({value: value});
-		ActionsDeputyList.searchDeputyAction(value);
+		var that = this;
+		setTimeout(function(){
+			if(that.state.value === value){
+				ActionsDeputyList.searchDeputyAction(value);
+			}
+		}, 500);
 	}
 
 	render(){
