@@ -45,9 +45,15 @@ class DeputyListStore {
 
 	searchDeputy(keywords){
 		let that = this;
-		Api.searchDeputy(keywords, (data) => {
-			that.setState(data);
-		});
+
+		if(keywords !== ""){
+			Api.searchDeputy(keywords, (data) => {
+				that.setState(data);
+			});
+		} else {
+			// Returns complete list
+			this.loadDeputyList();
+		}
 	}
 }
 
