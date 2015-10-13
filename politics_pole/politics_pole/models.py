@@ -1,3 +1,6 @@
+# coding: utf-8
+
+
 from django.db import models
 
 
@@ -22,13 +25,18 @@ class Party(models.Model):
 
 
 class Deputy(models.Model):
+    id = models.AutoField(primary_key=True)
     surname = models.TextField()
     name = models.TextField()
     slug = models.TextField(unique=True)
+    stat_vote_count = models.DecimalField(max_digits=42, decimal_places=2)
+    stat_no_vote = models.DecimalField(max_digits=42, decimal_places=2)
+    stat_participation = models.DecimalField(max_digits=42, decimal_places=2)
     party = models.ForeignKey(Party, related_name='party')
 
     class Meta:
-        db_table = "Deputy"
+        managed = False
+        db_table = "deputy_statistics"
 
     def __str__(self):
         return "%s (%s)" % (self.slug, self.party)
