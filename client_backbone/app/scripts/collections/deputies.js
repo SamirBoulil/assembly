@@ -3,13 +3,14 @@
 define([
   'underscore',
   'backbone',
-  'models/Deputies'
-], function (_, Backbone, DeputiesModel) {
+  'models/Deputy'
+], function (_, Backbone, DeputyModel) {
   'use strict';
 
   var DeputiesCollection = Backbone.Collection.extend({
-    model: DeputiesModel
+    model: DeputyModel,
+    url: 'http://127.0.0.1:8001/deputies'
   });
 
-  return DeputiesCollection;
+  return new DeputiesCollection();
 });

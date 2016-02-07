@@ -16,6 +16,7 @@ define([
     },
 
     validate: function(attrs, options) {
+      return true;
     },
 
     parse: function(response, options)  {

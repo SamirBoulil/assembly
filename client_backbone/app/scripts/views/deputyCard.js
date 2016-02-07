@@ -8,12 +8,12 @@ define([
 ], function ($, _, Backbone, JST) {
   'use strict';
 
-  var DeputyListView = Backbone.View.extend({
-    template: JST['app/scripts/templates/deputyList.ejs'],
+  var DeputyCardView = Backbone.View.extend({
+    template: JST['app/scripts/templates/deputyCard.ejs'],
 
     tagName: 'div',
 
-    id: 'web-app',
+    id: '',
 
     className: '',
 
@@ -25,8 +25,9 @@ define([
 
     render: function () {
       this.$el.html(this.template(this.model.toJSON()));
+      return this;
     }
   });
 
-  return DeputyListView;
+  return DeputyCardView;
 });

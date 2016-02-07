@@ -9,8 +9,6 @@ require.config({
     },
   },
   paths: {
-    deputyList: 'views/DeputyList',
-    deputyDetails: 'views/deputyDetails',
     jquery: '../bower_components/jquery/dist/jquery',
     backbone: '../bower_components/backbone/backbone',
     underscore: '../bower_components/lodash/dist/lodash',
@@ -18,7 +16,12 @@ require.config({
 });
 
 require([
-  'backbone'
-], function (Backbone) {
+  'jquery',
+  'backbone',
+  'views/app'
+], function ($, Backbone, DeputyListView) {
   Backbone.history.start();
+  $(function(){
+    new DeputyListView();
+  });
 });
