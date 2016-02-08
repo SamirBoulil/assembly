@@ -6,8 +6,10 @@ define([
   'backbone',
   'templates',
   'collections/deputies',
-  'views/deputyCard'
-], function ($, _, Backbone, JST, DeputyCollection, DeputyCard) {
+  'views/search',
+  'views/deputyList',
+  'views/deputyDetails'
+], function ($, _, Backbone, JST, DeputyCollection, SearchView, DeputyListView, DeputyDetails) {
   'use strict';
 
   var AppView = Backbone.View.extend({
@@ -18,22 +20,12 @@ define([
     events: {},
 
     initialize: function () {
-      this.$deputyList = this.$('#deputyList');
-      this.listenTo(DeputyCollection, 'all', _.debounce(this.render, 0));
+      var options = {deputyCollection: DeputyCollection};
 
-      DeputyCollection.fetch();
+      this.searchView = new SearchView(options);
+      this.DeputyListView = new DeputyListView(options);
+      this.deputyDetails = new DeputyDetails();
     },
-
-    render: function () {
-      var that = this;
-
-      DeputyCollection.each(function(deputyModel){
-          var view = new DeputyCard({model: deputyModel});
-          that.$deputyList.append(view.render().$el);
-      })
-
-      return this;
-    }
   });
 
   return AppView;

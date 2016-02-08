@@ -19,9 +19,9 @@ require([
   'jquery',
   'backbone',
   'views/app'
-], function ($, Backbone, DeputyListView) {
+], function ($, Backbone, App) {
   Backbone.history.start();
   $(function(){
-    new DeputyListView();
+    new App();
   });
 });

@@ -1,1 +1,37 @@
-<p>deputy card</p>
+<!-- TO REMOVE IT HAS TO BE IN APP.EJS TEMPLATE -->
+<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+  <a href="#bite">
+    <div class="panel panel-default">
+      <% //<div class="panel-heading">Image</div> %>
+      <div class="panel-body card">
+        <div class="card__title"><%= surname %> <%= name %></div>
+        <div class="card__subtitle"><%= party %></div>
+      </div>
+      <div class="panel-footer">
+        <div class="metric">
+          <div class="metric__title">Présence :</div>
+          <div class="metric__graphic">
+            <div class="progress">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= stat_participation %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= stat_participation %>%">
+                <span class="sr-only">40% Complete (success)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="metric">
+          <div class="metric__title">YES / NO</div>
+          <div class="metric__graphic">
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= 100 - stat_no_vote %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - stat_no_vote  %>%">
+                <span class="sr-only">40% Complete (success)</span>
+              </div>
+              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<%= stat_no_vote %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= stat_no_vote %>%">
+                <span class="sr-only">40% Complete (success)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
