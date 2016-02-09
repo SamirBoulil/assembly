@@ -9,6 +9,7 @@ class Decree(models.Model):
     title = models.TextField()
     link = models.TextField(blank=True, null=True)
     date = models.DateField(blank=True, null=True)
+    is_solemn = models.BooleanField(default=False)
 
     class Meta:
         db_table = "Decree"
@@ -24,7 +25,25 @@ class Party(models.Model):
         return self.name
 
 
+# class Deputy(models.Model):
+    # """ Model linked to concrete data table
+    # """
+    # id = models.AutoField(primary_key=True)
+    # surname = models.TextField()
+    # name = models.TextField()
+    # slug = models.TextField(unique=True)
+    # party = models.ForeignKey(Party, related_name='party')
+
+    # class Meta:
+        # db_table = "Deputy"
+
+    # def __str__(self):
+        # return "%s (%s)" % (self.slug, self.party)
+
+
 class Deputy(models.Model):
+    """ Model linked to view (
+    """
     id = models.AutoField(primary_key=True)
     surname = models.TextField()
     name = models.TextField()

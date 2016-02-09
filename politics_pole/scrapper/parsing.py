@@ -43,6 +43,15 @@ def get_vote_links(data_table):
     return apply_predicate_data(all_scrutins_links_selector, data_table)
 
 
+def get_solemn_decrees(data_table):
+    """ Returns decree ids of solemn decree 
+    """
+    all_solemn_decree_id = '//table[@class="scrutins"]//td[@class="denom"]/text()[contains(.,"*")]'
+    tmp = apply_predicate_data(all_solemn_decree_id, data_table)
+    # Remove star to get id
+    return [value[:-1] for value in tmp]
+
+
 # PARSING DECREES
 def get_decree_number(data_vote):
     """

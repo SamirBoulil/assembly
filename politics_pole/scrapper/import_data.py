@@ -9,6 +9,7 @@ from django.db import transaction
 from django.core.exceptions import ObjectDoesNotExist
 
 from .parsing import get_vote_links
+from .parsing import get_solemn_decrees
 from .parsing import get_decree_number
 from .parsing import get_decree_title
 from .parsing import get_decree_date
@@ -44,7 +45,7 @@ def is_valid_deputy(surname, name):
     return not (surname in INVALID_SURNAME_VALUES or name in INVALID_NAME_VALUES)
 
 
-def import_decree(decree_vote_data):
+def import_decree(decree_vote_data, solemn_decree_list):
     """
     """
     number = get_decree_number(decree_vote_data)
@@ -55,7 +56,8 @@ def import_decree(decree_vote_data):
         decree = Decree.objects.create(
             number=number,
             title=get_decree_title(decree_vote_data),
-            date=get_decree_date(decree_vote_data)
+            date=get_decree_date(decree_vote_data),
+            is_solemn=False if number not in solemn_decree_list else True
         )
         print("Inserted decree %s" % (str(decree)))
 
@@ -208,6 +210,7 @@ def import_data_votes_for_link(page_list):
     print("****** Decree list : %s  ******" % page_list)
     poll_list_page = download_data(page_list)
     links = get_vote_links(poll_list_page)
+    solemn_decree_list = get_solemn_decrees(poll_list_page)
     print("number of votes to parse  %d" % (len(links)))
 
     for link in links:
@@ -215,7 +218,7 @@ def import_data_votes_for_link(page_list):
         decree_vote_data = download_data(BASE_URL + link)
 
         print("*** Inserting Decrees ***")
-        import_decree(decree_vote_data)
+        import_decree(decree_vote_data, solemn_decree_list)
 
         print("*** Inserting Deputies ***")
         import_deputies(decree_vote_data)
