@@ -56,7 +56,8 @@ CREATE TABLE "Decree" (
     number integer NOT NULL,
     title text NOT NULL,
     link text,
-    date date
+    date date,
+    is_solemn BOOLEAN default False
 );
 
 

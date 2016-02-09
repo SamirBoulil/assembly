@@ -25,40 +25,40 @@ class Party(models.Model):
         return self.name
 
 
-# class Deputy(models.Model):
-    # """ Model linked to concrete data table
-    # """
-    # id = models.AutoField(primary_key=True)
-    # surname = models.TextField()
-    # name = models.TextField()
-    # slug = models.TextField(unique=True)
-    # party = models.ForeignKey(Party, related_name='party')
-
-    # class Meta:
-        # db_table = "Deputy"
-
-    # def __str__(self):
-        # return "%s (%s)" % (self.slug, self.party)
-
-
 class Deputy(models.Model):
-    """ Model linked to view (
+    """ Model linked to concrete data table
     """
     id = models.AutoField(primary_key=True)
     surname = models.TextField()
     name = models.TextField()
     slug = models.TextField(unique=True)
-    stat_vote_count = models.DecimalField(max_digits=42, decimal_places=2)
-    stat_no_vote = models.DecimalField(max_digits=42, decimal_places=2)
-    stat_participation = models.DecimalField(max_digits=42, decimal_places=2)
     party = models.ForeignKey(Party, related_name='party')
 
     class Meta:
-        managed = False
-        db_table = "deputy_statistics"
+        db_table = "Deputy"
 
     def __str__(self):
         return "%s (%s)" % (self.slug, self.party)
+
+
+# class Deputy(models.Model):
+    # """ Model linked to view (
+    # """
+    # id = models.AutoField(primary_key=True)
+    # surname = models.TextField()
+    # name = models.TextField()
+    # slug = models.TextField(unique=True)
+    # stat_vote_count = models.DecimalField(max_digits=42, decimal_places=2)
+    # stat_no_vote = models.DecimalField(max_digits=42, decimal_places=2)
+    # stat_participation = models.DecimalField(max_digits=42, decimal_places=2)
+    # party = models.ForeignKey(Party, related_name='party')
+
+    # class Meta:
+        # managed = False
+        # db_table = "deputy_statistics"
+
+    # def __str__(self):
+        # return "%s (%s)" % (self.slug, self.party)
 
 
 class Vote(models.Model):

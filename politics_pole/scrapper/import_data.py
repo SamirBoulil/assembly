@@ -49,6 +49,7 @@ def import_decree(decree_vote_data, solemn_decree_list):
     """
     """
     number = get_decree_number(decree_vote_data)
+    is_solemn = False if number not in solemn_decree_list else True
 
     try:
         Decree.objects.get(number=number)
@@ -57,7 +58,7 @@ def import_decree(decree_vote_data, solemn_decree_list):
             number=number,
             title=get_decree_title(decree_vote_data),
             date=get_decree_date(decree_vote_data),
-            is_solemn=False if number not in solemn_decree_list else True
+            is_solemn=is_solemn
         )
         print("Inserted decree %s" % (str(decree)))
 

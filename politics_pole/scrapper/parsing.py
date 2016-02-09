@@ -49,19 +49,19 @@ def get_solemn_decrees(data_table):
     all_solemn_decree_id = '//table[@class="scrutins"]//td[@class="denom"]/text()[contains(.,"*")]'
     tmp = apply_predicate_data(all_solemn_decree_id, data_table)
     # Remove star to get id
-    return [value[:-1] for value in tmp]
+    return [int(value[:-1]) for value in tmp]
 
 
 # PARSING DECREES
 def get_decree_number(data_vote):
     """
-
     :returns: the number of the decree.
     :rtype: integerr
     """
     decree_number_selector = '//div[@class="titre-bandeau-bleu"]/h1/text()'
-    number_raw = apply_predicate_data(decree_number_selector, data_vote)[0]
-    number = re.search('\d+$', number_raw)
+    number_raw = apply_predicate_data(decree_number_selector, data_vote)
+    number = re.search('\d+$', number_raw[0])
+
     if number_raw is None:
         raise Exception("Decree number not parsed")
 
