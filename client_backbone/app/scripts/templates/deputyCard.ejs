@@ -9,10 +9,10 @@
       </div>
       <div class="panel-footer">
         <div class="metric">
-          <div class="metric__title">Présence :</div>
+          <div class="metric__title">Présence aux scrutins solennel:</div>
           <div class="metric__graphic">
             <div class="progress">
-              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= stat_participation %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= stat_participation %>%">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= stat_solemn_participation_percentage %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= stat_solemn_participation_percentage %>%">
                 <span class="sr-only">40% Complete (success)</span>
               </div>
             </div>
@@ -22,10 +22,10 @@
           <div class="metric__title">YES / NO</div>
           <div class="metric__graphic">
             <div class="progress">
-              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= 100 - stat_no_vote %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - stat_no_vote  %>%">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= 100 - stat_global_no_vote_percentage %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - stat_global_no_vote_percentage  %>%">
                 <span class="sr-only">40% Complete (success)</span>
               </div>
-              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<%= stat_no_vote %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= stat_no_vote %>%">
+              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<%= stat_global_no_vote_percentage %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= stat_global_no_vote_percentage %>%">
                 <span class="sr-only">40% Complete (success)</span>
               </div>
             </div>
